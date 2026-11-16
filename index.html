@@ -464,7 +464,12 @@ function sendWhatsAppOrder() {
 }
 
 /* Dashboard Logic */
-function openDashboard() {
+function openDashboard() {const pass = prompt("أدخل كلمة مرور الإدارة:");
+if (pass !== "اكتب_رقمك_السرى_هنا") {
+    alert("كلمة المرور غير صحيحة");
+    return;
+}
+
 1111):");
   if (pass !== "1111") { alert("كلمة المرور غير صحيحة"); return; }
 
