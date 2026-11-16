@@ -64,7 +64,7 @@
     box-shadow: 0 3px 10px rgba(0,0,0,0.08); display: flex; flex-direction: column;
     border: 1px solid #eee;
   }
-  .card img { width: 100%; height: 160px; object-fit: cover; background: #f1f1f1; }
+  .card img { width: 100%; height: 170px; object-fit: cover; background: #f1f1f1; }
   .card-body { padding: 14px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
   .card-cat { font-size: 11px; color: var(--primary); font-weight: bold; margin-bottom: 4px; }
   .card-title { font-size: 18px; font-weight: bold; margin: 0 0 6px; }
@@ -142,7 +142,7 @@
 </header>
 
 <div class="controls">
-  <input type="text" id="searchInput" class="search-box" placeholder="ابحث عن صنف (فطير، بيتزا، كريب، بروستد...)" onkeyup="renderMenu()">
+  <input type="text" id="searchInput" class="search-box" placeholder="ابحث عن صنف (فطير، مشلتت، بيتزا، كريب، بيبسي...)" onkeyup="renderMenu()">
   <div class="tabs" id="categoryTabs"></div>
 </div>
 
@@ -191,7 +191,7 @@
     <h4>➕ إضافة صنف جديد</h4>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:15px; background:#f8f9fa; padding:10px; border-radius:8px;">
       <input type="text" id="newName" placeholder="اسم الصنف">
-      <input type="text" id="newCat" placeholder="القسم (مثال: فطير حادق)">
+      <input type="text" id="newCat" placeholder="القسم (مثال: فطير حلو)">
       <input type="text" id="newDesc" placeholder="الوصف / المكونات">
       <input type="number" id="newPrice" placeholder="السعر بالجنيه">
       <button onclick="addNewItem()" style="grid-column:span 2; background:var(--primary); color:white; border:none; padding:8px; border-radius:6px; font-weight:bold; cursor:pointer;">إضافة للمنيو</button>
@@ -206,13 +206,16 @@
 <script>
 const IMAGES = {
   feteer: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=500&q=70",
+  meshaltet: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=500&q=70",
+  feteerWitch: "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=500&q=70",
   pizza: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=500&q=70",
   pasta: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=500&q=70",
-  sweet: "https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&w=500&q=70",
-  crepe: "https://images.unsplash.com/photo-1584278858536-52532423b9ea?auto=format&fit=crop&w=500&q=70",
+  sweet: "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=500&q=70",
+  crepe: "https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&w=500&q=70",
   sandwich: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=70",
   broast: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=500&q=70",
-  sides: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=500&q=70"
+  sides: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=500&q=70",
+  drinks: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=70"
 };
 
 const DEFAULT_MENU = [
@@ -234,6 +237,23 @@ const DEFAULT_MENU = [
   { id: 15, cat: "فطير حادق", name: "فطير تونة", desc: "قطع تونة، فلفل، زيتون", img: IMAGES.feteer, prices: [{label:"وسط", val:190}] },
   { id: 16, cat: "فطير حادق", name: "فطير جمبري", desc: "جمبري متبل، خضروات، موزاريلا", img: IMAGES.feteer, prices: [{label:"وسط", val:255}, {label:"كبير", val:370}] },
 
+  // فطير مشلتت (قسم مستقل)
+  { id: 44, cat: "فطير مشلتت", name: "فطير مشلتت بالسمن البلدي", desc: "فطير مشلتت فلاحي مورق بالسمن البلدي الصافي 100%", img: IMAGES.meshaltet, prices: [{label:"وسط", val:140}, {label:"كبير", val:165}] },
+
+  // فطير حلو (قسم مستقل)
+  { id: 45, cat: "فطير حلو", name: "فطير حلو سادة (سكر ولبن)", desc: "فطير مورق بالسمن البلدي والسكر واللبن", img: IMAGES.sweet, prices: [{label:"فطيرة", val:45}] },
+  { id: 46, cat: "فطير حلو", name: "فطير كاستر", desc: "محشو كاستر كريمي وسكر بودرة", img: IMAGES.sweet, prices: [{label:"فطيرة", val:50}] },
+  { id: 47, cat: "فطير حلو", name: "فطير بغاشة جوز هند", desc: "بغاشة مقرمشة بجوز الهند والسكر", img: IMAGES.sweet, prices: [{label:"فطيرة", val:70}] },
+  { id: 48, cat: "فطير حلو", name: "فطير ملوكي زبيب وجوز هند", desc: "كاستر، زبيب، جوز هند، قشطة، عسل، سكر، لبن", img: IMAGES.sweet, prices: [{label:"فطيرة", val:105}] },
+  { id: 49, cat: "فطير حلو", name: "فطير بوريو", desc: "قطع بسكويت بوريو وشيكولاتة", img: IMAGES.sweet, prices: [{label:"فطيرة", val:80}] },
+  { id: 50, cat: "فطير حلو", name: "فطير هوهوز", desc: "كيك هوهوز وشيكولاتة", img: IMAGES.sweet, prices: [{label:"فطيرة", val:80}] },
+  { id: 51, cat: "فطير حلو", name: "فطير قشطة وعسل", desc: "قشطة بلدي وعسل نحل", img: IMAGES.sweet, prices: [{label:"فطيرة", val:135}] },
+  { id: 52, cat: "فطير حلو", name: "فطير شيكولاتة", desc: "صوص شيكولاتة غني", img: IMAGES.sweet, prices: [{label:"فطيرة", val:105}] },
+  { id: 53, cat: "فطير حلو", name: "فطير شيكولاتة مكسرات", desc: "شيكولاتة مع تشكيلة مكسرات", img: IMAGES.sweet, prices: [{label:"فطيرة", val:135}] },
+  { id: 54, cat: "فطير حلو", name: "فطير بلاك فورست", desc: "نص شيكولاتة - نص مكسرات", img: IMAGES.sweet, prices: [{label:"فطيرة", val:145}] },
+  { id: 55, cat: "فطير حلو", name: "فطير كهرمانة مكسرات", desc: "كاستر - موز - قشطة - عسل - سكر - لبن - مكسرات - أرز", img: IMAGES.sweet, prices: [{label:"فطيرة", val:175}] },
+  { id: 56, cat: "فطير حلو", name: "فطير بابا علي حلو", desc: "كاستر - زبيب - جوز هند - قشطة - عسل - سمنة - سكر - لبن - شيكولاتة - مكسرات", img: IMAGES.sweet, prices: [{label:"فطيرة", val:215}] },
+
   // البيتزا
   { id: 17, cat: "البيتزا", name: "بيتزا مارجريتا", desc: "صلصة بيتزا، جبنة موزاريلا طبيعي", img: IMAGES.pizza, prices: [{label:"وسط", val:105}, {label:"كبير", val:145}] },
   { id: 18, cat: "البيتزا", name: "بيتزا مشروم", desc: "مشروم طازج، خضروات، موزاريلا", img: IMAGES.pizza, prices: [{label:"وسط", val:130}, {label:"كبير", val:180}] },
@@ -251,36 +271,15 @@ const DEFAULT_MENU = [
   { id: 30, cat: "البيتزا", name: "بيتزا تونة", desc: "قطع تونة، بصل، فلفل، زيتون", img: IMAGES.pizza, prices: [{label:"وسط", val:190}] },
   { id: 31, cat: "البيتزا", name: "بيتزا جمبري", desc: "جمبري متبل، خضروات، موزاريلا", img: IMAGES.pizza, prices: [{label:"وسط", val:255}, {label:"كبير", val:300}] },
 
-  // مكرونات
-  { id: 32, cat: "مكرونات", name: "طاجن مكرونة خضار", desc: "مكرونة بالصلصة والخضروات والموزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:60}, {label:"وسط", val:80}] },
-  { id: 33, cat: "مكرونات", name: "طاجن مكرونة مشروم", desc: "مشروم طازج وجبنة موزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:75}, {label:"وسط", val:100}] },
-  { id: 34, cat: "مكرونات", name: "طاجن مكرونة سجق", desc: "سجق بلدي وجبنة موزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:85}, {label:"وسط", val:110}] },
-  { id: 35, cat: "مكرونات", name: "طاجن مكرونة مفروم", desc: "لحم مفروم متبل وموزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:85}, {label:"وسط", val:110}] },
-  { id: 36, cat: "مكرونات", name: "طاجن مكرونة بسطرمة", desc: "بسطرمة بلدي وجبنة موزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:100}, {label:"وسط", val:130}] },
-  { id: 37, cat: "مكرونات", name: "طاجن مكرونة مشكل لحوم", desc: "سدق - بسطرمة - لحم مفروم", img: IMAGES.pasta, prices: [{label:"وسط", val:135}] },
-  { id: 38, cat: "مكرونات", name: "طاجن مكرونة مشكل جبن", desc: "موزاريلا - رومي - كيري - لافاشكيري - شيدر", img: IMAGES.pasta, prices: [{label:"صغير", val:100}, {label:"وسط", val:130}] },
-  { id: 39, cat: "مكرونات", name: "طاجن مكرونة سوسيس", desc: "سوسيس وجبنة موزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:75}, {label:"وسط", val:100}] },
-  { id: 40, cat: "مكرونات", name: "طاجن مكرونة دجاج", desc: "قطع دجاج وموزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:100}, {label:"وسط", val:130}] },
-  { id: 41, cat: "مكرونات", name: "طاجن نجرسكو", desc: "دجاج - مشروم - صوص أبيض وموزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:105}, {label:"وسط", val:140}] },
-  { id: 42, cat: "مكرونات", name: "طاجن مكرونة دجاج كرسبي", desc: "قطع دجاج كرسبي وموزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:105}, {label:"وسط", val:140}] },
-  { id: 43, cat: "مكرونات", name: "طاجن مكرونة جمبري", desc: "جمبري متبل وموزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:135}, {label:"وسط", val:185}] },
+  // فطير ويتش (قسم مستقل)
+  { id: 73, cat: "فطير ويتش", name: "فطير ويتش موتزاريلا", desc: "فطير ملفوف محشو جبنة موتزاريلا طبيعي", img: IMAGES.feteerWitch, prices: [{label:"فطير ويتش", val:80}] },
+  { id: 730, cat: "فطير ويتش", name: "فطير ويتش بطاطس", desc: "فطير ملفوف بطاطس وموتزاريلا", img: IMAGES.feteerWitch, prices: [{label:"فطير ويتش", val:80}] },
+  { id: 74, cat: "فطير ويتش", name: "فطير ويتش سوسيس", desc: "فطير ملفوف سوسيس وموتزاريلا", img: IMAGES.feteerWitch, prices: [{label:"فطير ويتش", val:85}] },
+  { id: 75, cat: "فطير ويتش", name: "فطير ويتش سجق", desc: "فطير ملفوف سجق وموتزاريلا", img: IMAGES.feteerWitch, prices: [{label:"فطير ويتش", val:90}] },
+  { id: 76, cat: "فطير ويتش", name: "فطير ويتش لحم مفروم / بسطرمة", desc: "فطير ملفوف لحم مفروم أو بسطرمة", img: IMAGES.feteerWitch, prices: [{label:"لحم مفروم", val:105}, {label:"بسطرمة", val:105}] },
+  { id: 77, cat: "فطير ويتش", name: "فطير ويتش فراخ / مشكل لحوم / جبن / استربس", desc: "فطير ملفوف بالحشوة المفضلة", img: IMAGES.feteerWitch, prices: [{label:"فراخ / استربس", val:110}, {label:"مشكل لحوم / جبن", val:110}] },
 
-  // فطير حلو ومشلتت
-  { id: 44, cat: "فطير حلو ومشلتت", name: "فطير مشلتت بالسمن البلدي", desc: "فطير مشلتت فلاحي بالسمن البلدي الصافي", img: IMAGES.sweet, prices: [{label:"وسط", val:140}, {label:"كبير", val:165}] },
-  { id: 45, cat: "فطير حلو ومشلتت", name: "فطير حلو سادة (سكر ولبن)", desc: "فطير مورق بالسمن البلدي والسكر", img: IMAGES.sweet, prices: [{label:"فطيرة", val:45}] },
-  { id: 46, cat: "فطير حلو ومشلتت", name: "فطير كاستر", desc: "محشو كاستر كريمي وسكر بودرة", img: IMAGES.sweet, prices: [{label:"فطيرة", val:50}] },
-  { id: 47, cat: "فطير حلو ومشلتت", name: "فطير بغاشة جوز هند", desc: "بغاشة مقرمشة بجوز الهند والسكر", img: IMAGES.sweet, prices: [{label:"فطيرة", val:70}] },
-  { id: 48, cat: "فطير حلو ومشلتت", name: "فطير ملوكي زبيب وجوز هند", desc: "كاستر، زبيب، جوز هند، قشطة، عسل، سكر، لبن", img: IMAGES.sweet, prices: [{label:"فطيرة", val:105}] },
-  { id: 49, cat: "فطير حلو ومشلتت", name: "فطير بوريو", desc: "قطع بسكويت بوريو وشيكولاتة", img: IMAGES.sweet, prices: [{label:"فطيرة", val:80}] },
-  { id: 50, cat: "فطير حلو ومشلتت", name: "فطير هوهوز", desc: "كيك هوهوز وشيكولاتة", img: IMAGES.sweet, prices: [{label:"فطيرة", val:80}] },
-  { id: 51, cat: "فطير حلو ومشلتت", name: "فطير قشطة وعسل", desc: "قشطة بلدي وعسل نحل", img: IMAGES.sweet, prices: [{label:"فطيرة", val:135}] },
-  { id: 52, cat: "فطير حلو ومشلتت", name: "فطير شيكولاتة", desc: "صوص شيكولاتة غني", img: IMAGES.sweet, prices: [{label:"فطيرة", val:105}] },
-  { id: 53, cat: "فطير حلو ومشلتت", name: "فطير شيكولاتة مكسرات", desc: "شيكولاتة مع تشكيلة مكسرات", img: IMAGES.sweet, prices: [{label:"فطيرة", val:135}] },
-  { id: 54, cat: "فطير حلو ومشلتت", name: "فطير بلاك فورست", desc: "نص شيكولاتة - نص مكسرات", img: IMAGES.sweet, prices: [{label:"فطيرة", val:145}] },
-  { id: 55, cat: "فطير حلو ومشلتت", name: "فطير كهرمانة مكسرات", desc: "كاستر - موز - قشطة - عسل - سكر - لبن - مكسرات - أرز", img: IMAGES.sweet, prices: [{label:"فطيرة", val:175}] },
-  { id: 56, cat: "فطير حلو ومشلتت", name: "فطير بابا علي حلو", desc: "كاستر - زبيب - جوز هند - قشطة - عسل - سمنة - سكر - لبن - شيكولاتة - مكسرات", img: IMAGES.sweet, prices: [{label:"فطيرة", val:215}] },
-
-  // كريب حادق وحلو
+  // الكريب (بصورة كريب)
   { id: 57, cat: "الكريب", name: "كريب بطاطس", desc: "بطاطس مقرمشة، جبن، صوصات", img: IMAGES.crepe, prices: [{label:"كريب", val:90}] },
   { id: 58, cat: "الكريب", name: "كريب موتزاريلا", desc: "جبنة موتزاريلا طبيعي سايحة", img: IMAGES.crepe, prices: [{label:"كريب", val:100}] },
   { id: 59, cat: "الكريب", name: "كريب مشكل جبن", desc: "موتزاريلا - رومي - كيري - لافاشكيري - شيدر", img: IMAGES.crepe, prices: [{label:"كريب", val:115}] },
@@ -295,23 +294,32 @@ const DEFAULT_MENU = [
   { id: 68, cat: "الكريب", name: "كريب شاورما فراخ", desc: "شاورما دجاج بالتتبيلة الخاصة", img: IMAGES.crepe, prices: [{label:"كريب", val:130}] },
   { id: 69, cat: "الكريب", name: "كريب ميكس تشيكن", desc: "شرائح بانيه - شيش - شاورما", img: IMAGES.crepe, prices: [{label:"كريب", val:140}] },
   { id: 70, cat: "الكريب", name: "كريب جمبري مقلي", desc: "جمبري مقلي مقرمش وصوصات", img: IMAGES.crepe, prices: [{label:"كريب", val:155}] },
-  { id: 71, cat: "الكريب", name: "كريب حلو شيكولاتة", desc: "كريب محشو شيكولاتة", img: IMAGES.sweet, prices: [{label:"كريب", val:55}] },
-  { id: 72, cat: "الكريب", name: "كريب حلو شيكولاتة بندق", desc: "شيكولاتة بالبندق", img: IMAGES.sweet, prices: [{label:"كريب", val:80}] },
+  { id: 71, cat: "الكريب", name: "كريب حلو شيكولاتة", desc: "كريب محشو شيكولاتة", img: IMAGES.crepe, prices: [{label:"كريب", val:55}] },
+  { id: 72, cat: "الكريب", name: "كريب حلو شيكولاتة بندق", desc: "شيكولاتة بالبندق", img: IMAGES.crepe, prices: [{label:"كريب", val:80}] },
 
-  // سندوتشات وفطير ويتش
-  { id: 73, cat: "سندوتشات وفطير ويتش", name: "فطير ويتش موتزاريلا / بطاطس", desc: "فطير ملفوف محشو", img: IMAGES.sandwich, prices: [{label:"فطير ويتش", val:80}] },
-  { id: 74, cat: "سندوتشات وفطير ويتش", name: "فطير ويتش سوسيس", desc: "فطير ملفوف سوسيس وموتزاريلا", img: IMAGES.sandwich, prices: [{label:"فطير ويتش", val:85}] },
-  { id: 75, cat: "سندوتشات وفطير ويتش", name: "فطير ويتش سجق", desc: "فطير ملفوف سجق وموتزاريلا", img: IMAGES.sandwich, prices: [{label:"فطير ويتش", val:90}] },
-  { id: 76, cat: "سندوتشات وفطير ويتش", name: "فطير ويتش لحم مفروم / بسطرمة", desc: "فطير ملفوف لحم مفروم أو بسطرمة", img: IMAGES.sandwich, prices: [{label:"فطير ويتش", val:105}] },
-  { id: 77, cat: "سندوتشات وفطير ويتش", name: "فطير ويتش فراخ / مشكل لحوم / جبن / استربس", desc: "فطير ملفوف بالحشوة المفضلة", img: IMAGES.sandwich, prices: [{label:"فطير ويتش", val:110}] },
-  { id: 78, cat: "سندوتشات وفطير ويتش", name: "سندوتش بطاطس مايونيز", desc: "عيش سوري أو بيتي بان", img: IMAGES.sandwich, prices: [{label:"سوري", val:45}, {label:"بيتي بان", val:45}] },
-  { id: 79, cat: "سندوتشات وفطير ويتش", name: "سندوتش بطاطس موتزاريلا", desc: "بطاطس مع جبنة موتزاريلا سايحة", img: IMAGES.sandwich, prices: [{label:"سوري", val:60}, {label:"بيتي بان", val:60}] },
-  { id: 80, cat: "سندوتشات وفطير ويتش", name: "سندوتش شيدر مقلية", desc: "أصابع شيدر مقلية مقرمشة", img: IMAGES.sandwich, prices: [{label:"سوري", val:50}, {label:"بيتي بان", val:50}] },
-  { id: 81, cat: "سندوتشات وفطير ويتش", name: "سندوتش بيض أومليت / برجر", desc: "بيتي بان طازج", img: IMAGES.sandwich, prices: [{label:"بيض أومليت", val:35}, {label:"برجر لحم/فراخ", val:40}] },
-  { id: 82, cat: "سندوتشات وفطير ويتش", name: "سندوتش سجق جريل / إسكندراني / سوسيس", desc: "متاح سوري أو بيتي بان", img: IMAGES.sandwich, prices: [{label:"سوري", val:60}, {label:"بيتي بان", val:65}] },
-  { id: 83, cat: "سندوتشات وفطير ويتش", name: "سندوتش سجق ميكسيكانو حار / كفتة مشوية", desc: "متاح سوري أو بيتي بان", img: IMAGES.sandwich, prices: [{label:"سجق ميكسيكانو", val:70}, {label:"كفتة مشوية", val:75}] },
-  { id: 84, cat: "سندوتشات وفطير ويتش", name: "سندوتش بانيه / شيش / شاورما / استربس", desc: "متاح سوري أو بيتي بان", img: IMAGES.sandwich, prices: [{label:"سوري", val:75}, {label:"بيتي بان", val:80}] },
-  { id: 85, cat: "سندوتشات وفطير ويتش", name: "سندوتش جمبري مقلي", desc: "جمبري مقرمش مع صوص التارتار", img: IMAGES.sandwich, prices: [{label:"سوري", val:105}, {label:"بيتي بان", val:110}] },
+  // مكرونات
+  { id: 32, cat: "مكرونات", name: "طاجن مكرونة خضار", desc: "مكرونة بالصلصة والخضروات والموزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:60}, {label:"وسط", val:80}] },
+  { id: 33, cat: "مكرونات", name: "طاجن مكرونة مشروم", desc: "مشروم طازج وجبنة موزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:75}, {label:"وسط", val:100}] },
+  { id: 34, cat: "مكرونات", name: "طاجن مكرونة سجق", desc: "سجق بلدي وجبنة موزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:85}, {label:"وسط", val:110}] },
+  { id: 35, cat: "مكرونات", name: "طاجن مكرونة مفروم", desc: "لحم مفروم متبل وموزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:85}, {label:"وسط", val:110}] },
+  { id: 36, cat: "مكرونات", name: "طاجن مكرونة بسطرمة", desc: "بسطرمة بلدي وجبنة موزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:100}, {label:"وسط", val:130}] },
+  { id: 37, cat: "مكرونات", name: "طاجن مكرونة مشكل لحوم", desc: "سدق - بسطرمة - لحم مفروم", img: IMAGES.pasta, prices: [{label:"وسط", val:135}] },
+  { id: 38, cat: "مكرونات", name: "طاجن مكرونة مشكل جبن", desc: "موزاريلا - رومي - كيري - لافاشكيري - شيدر", img: IMAGES.pasta, prices: [{label:"صغير", val:100}, {label:"وسط", val:130}] },
+  { id: 39, cat: "مكرونات", name: "طاجن مكرونة سوسيس", desc: "سوسيس وجبنة موزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:75}, {label:"وسط", val:100}] },
+  { id: 40, cat: "مكرونات", name: "طاجن مكرونة دجاج", desc: "قطع دجاج وموزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:100}, {label:"وسط", val:130}] },
+  { id: 41, cat: "مكرونات", name: "طاجن نجرسكو", desc: "دجاج - مشروم - صوص أبيض وموزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:105}, {label:"وسط", val:140}] },
+  { id: 42, cat: "مكرونات", name: "طاجن مكرونة دجاج كرسبي", desc: "قطع دجاج كرسبي وموزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:105}, {label:"وسط", val:140}] },
+  { id: 43, cat: "مكرونات", name: "طاجن مكرونة جمبري", desc: "جمبري متبل وموزاريلا", img: IMAGES.pasta, prices: [{label:"صغير", val:135}, {label:"وسط", val:185}] },
+
+  // سندوتشات (قسم مستقل)
+  { id: 78, cat: "سندوتشات", name: "سندوتش بطاطس مايونيز", desc: "عيش سوري أو بيتي بان", img: IMAGES.sandwich, prices: [{label:"سوري", val:45}, {label:"بيتي بان", val:45}] },
+  { id: 79, cat: "سندوتشات", name: "سندوتش بطاطس موتزاريلا", desc: "بطاطس مع جبنة موتزاريلا سايحة", img: IMAGES.sandwich, prices: [{label:"سوري", val:60}, {label:"بيتي بان", val:60}] },
+  { id: 80, cat: "سندوتشات", name: "سندوتش شيدر مقلية", desc: "أصابع شيدر مقلية مقرمشة", img: IMAGES.sandwich, prices: [{label:"سوري", val:50}, {label:"بيتي بان", val:50}] },
+  { id: 81, cat: "سندوتشات", name: "سندوتش بيض أومليت / برجر", desc: "بيتي بان طازج", img: IMAGES.sandwich, prices: [{label:"بيض أومليت", val:35}, {label:"برجر لحم/فراخ", val:40}] },
+  { id: 82, cat: "سندوتشات", name: "سندوتش سجق جريل / إسكندراني / سوسيس", desc: "متاح سوري أو بيتي بان", img: IMAGES.sandwich, prices: [{label:"سوري", val:60}, {label:"بيتي بان", val:65}] },
+  { id: 83, cat: "سندوتشات", name: "سندوتش سجق ميكسيكانو حار / كفتة مشوية", desc: "متاح سوري أو بيتي بان", img: IMAGES.sandwich, prices: [{label:"سجق ميكسيكانو", val:70}, {label:"كفتة مشوية", val:75}] },
+  { id: 84, cat: "سندوتشات", name: "سندوتش بانيه / شيش / شاورما / استربس", desc: "متاح سوري أو بيتي بان", img: IMAGES.sandwich, prices: [{label:"سوري", val:75}, {label:"بيتي بان", val:80}] },
+  { id: 85, cat: "سندوتشات", name: "سندوتش جمبري مقلي", desc: "جمبري مقرمش مع صوص التارتار", img: IMAGES.sandwich, prices: [{label:"سوري", val:105}, {label:"بيتي بان", val:110}] },
 
   // البروستد ووجبات الدجاج
   { id: 86, cat: "بروستد ووجبات", name: "سناك بروستد", desc: "2 قطعة بروستد + ثومية + خبز + بطاطس", img: IMAGES.broast, prices: [{label:"وجبة", val:135}] },
@@ -326,22 +334,26 @@ const DEFAULT_MENU = [
   { id: 95, cat: "بروستد ووجبات", name: "تشيكن تشيزي فرايز", desc: "بوم فريت + استربس + صوص شيدر", img: IMAGES.broast, prices: [{label:"وسط", val:75}, {label:"كبير", val:110}] },
   { id: 96, cat: "بروستد ووجبات", name: "بابا علي بلاتر", desc: "5 أونيون رينج + 5 موتزاريلا ستيك + 5 بوب كورن + فرايز + صوصات", img: IMAGES.broast, prices: [{label:"بوكس", val:200}] },
 
-  // مقبلات ومشروبات وإضافات
-  { id: 97, cat: "مقبلات ومشروبات", name: "باكيت بطاطس مقلية", desc: "بطاطس مقرمشة", img: IMAGES.sides, prices: [{label:"صغير", val:35}, {label:"باكيت", val:40}] },
-  { id: 98, cat: "مقبلات ومشروبات", name: "موتزاريلا ستيك (3 قطع)", desc: "أصابع جبنة موتزاريلا مقلية", img: IMAGES.sides, prices: [{label:"طلب", val:75}] },
-  { id: 99, cat: "مقبلات ومشروبات", name: "تشيكن بوب كورن (8 قطع)", desc: "قطع دجاج مقرمشة + صوص هاني ماسترد", img: IMAGES.sides, prices: [{label:"طلب", val:90}] },
-  { id: 100, cat: "مقبلات ومشروبات", name: "سلطات (مخلل / طحينة / خضراء / كول سلو)", desc: "علبة سلطة طازجة", img: IMAGES.sides, prices: [{label:"علبة", val:15}] },
-  { id: 101, cat: "مقبلات ومشروبات", name: "مشروبات غازية", desc: "كانز أو زجاجة 1 لتر", img: IMAGES.sides, prices: [{label:"كانز", val:20}, {label:"1 لتر", val:35}] },
-  { id: 102, cat: "مقبلات ومشروبات", name: "إضافة أرز بسمتي / قطعة استربس", desc: "إضافة جانبية", img: IMAGES.sides, prices: [{label:"أرز بسمتي", val:30}, {label:"قطعة استربس", val:35}] }
+  // مقبلات وسلطات
+  { id: 97, cat: "مقبلات وسلطات", name: "باكيت بطاطس مقلية", desc: "بطاطس مقرمشة", img: IMAGES.sides, prices: [{label:"صغير", val:35}, {label:"باكيت", val:40}] },
+  { id: 98, cat: "مقبلات وسلطات", name: "موتزاريلا ستيك (3 قطع)", desc: "أصابع جبنة موتزاريلا مقلية", img: IMAGES.sides, prices: [{label:"طلب", val:75}] },
+  { id: 99, cat: "مقبلات وسلطات", name: "تشيكن بوب كورن (8 قطع)", desc: "قطع دجاج مقرمشة + صوص هاني ماسترد", img: IMAGES.sides, prices: [{label:"طلب", val:90}] },
+  { id: 100, cat: "مقبلات وسلطات", name: "سلطات (مخلل / طحينة / خضراء / كول سلو)", desc: "علبة سلطة طازجة", img: IMAGES.sides, prices: [{label:"علبة", val:15}] },
+  { id: 102, cat: "مقبلات وسلطات", name: "إضافة أرز بسمتي / قطعة استربس", desc: "إضافة جانبية", img: IMAGES.sides, prices: [{label:"أرز بسمتي", val:30}, {label:"قطعة استربس", val:35}] },
+
+  // المشروبات (قسم مستقل بصور مياه غازية)
+  { id: 1011, cat: "المشروبات", name: "بيبسي (Pepsi)", desc: "مياه غازية مثلجة (كانز أو زجاجة 1 لتر)", img: IMAGES.drinks, prices: [{label:"كانز", val:20}, {label:"1 لتر", val:35}] },
+  { id: 1012, cat: "المشروبات", name: "سفن أب (7UP)", desc: "مياه غازية مثلجة (كانز أو زجاجة 1 لتر)", img: IMAGES.drinks, prices: [{label:"كانز", val:20}, {label:"1 لتر", val:35}] },
+  { id: 1013, cat: "المشروبات", name: "ميرندا (Mirinda)", desc: "مياه غازية مثلجة (كانز أو زجاجة 1 لتر)", img: IMAGES.drinks, prices: [{label:"كانز", val:20}, {label:"1 لتر", val:35}] }
 ];
 
-let menuData = JSON.parse(localStorage.getItem('babaAliMenu')) || DEFAULT_MENU;
+let menuData = JSON.parse(localStorage.getItem('babaAliMenu_v2')) || DEFAULT_MENU;
 let activeCat = "الكل";
 let cart = [];
 let sessionOrders = Number(localStorage.getItem('babaAliOrders')) || 0;
 
 function saveMenu() {
-  localStorage.setItem('babaAliMenu', JSON.stringify(menuData));
+  localStorage.setItem('babaAliMenu_v2', JSON.stringify(menuData));
   renderTabs();
   renderMenu();
 }
@@ -502,7 +514,7 @@ function addNewItem() {
 
 function resetMenu() {
   if (confirm("هل تريد استعادة المنيو الأصلي بالكامل؟")) {
-    localStorage.removeItem('babaAliMenu');
+    localStorage.removeItem('babaAliMenu_v2');
     menuData = [...DEFAULT_MENU];
     saveMenu();
     renderDashItems();
